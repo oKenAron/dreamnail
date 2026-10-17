@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Dream Nail</string>
+    <string name="sleep_timer_minutes">%1$d 分钟</string>
+    <string name="sleep_timer_start">开始</string>
+    <string name="sleep_timer_cancel">取消</string>
+    <string name="sleep_timer_channel_name">睡眠定时器</string>
+    <string name="sleep_timer_notification_title">睡眠定时器运行中</string>
+</resources>
