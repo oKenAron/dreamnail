@@ -32,6 +32,18 @@ Package name: `io.github.okenaron.dreamnail`
 - Build a working skeleton first, then add features incrementally.
 - Decisions and their background are recorded in this file.
 
+## Testing and CI (2026-10-18)
+
+- **CI:** GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs on every push and pull request on `ubuntu-latest`, except when only documentation (`*.md`, `LICENSE`) changes:
+  ```bash
+  ./gradlew lint testDebugUnitTest assembleDebug
+  ```
+  Lint and test reports are uploaded as a workflow artifact (also on failure). There is no CD; the APK is built and installed locally.
+- **Unit tests** (`app/src/test/`) run on the JVM and cover pure logic. Logic is moved out of Compose screens and services into plain functions so it can be tested without a device (e.g. `formatRemaining()`).
+- **Instrumented tests** (`app/src/androidTest/`) are not run in CI for now.
+- **On-device checks** are kept to a few points that only real hardware can show (e.g. whether Android 17 actually applies volume changes), using `adb logcat` output.
+- Branches are merged into `main` locally with `git merge --ff-only`; pull requests are not used for now.
+
 ## Feature 1: Sleep timer
 
 **Goal:** shortly before the timer ends, gradually lower the media volume, then pause playback in other apps (YouTube, Spotify, etc.), and finally restore the original volume.
