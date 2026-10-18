@@ -93,10 +93,8 @@ private fun TimerRunning(endAt: Long) {
             delay(1_000)
         }
     }
-    val remainingSeconds = ((endAt - now).coerceAtLeast(0) + 999) / 1_000
-
     Text(
-        text = "%d:%02d".format(remainingSeconds / 60, remainingSeconds % 60),
+        text = formatRemaining(endAt - now),
         style = MaterialTheme.typography.displayLarge,
     )
     OutlinedButton(onClick = { SleepTimerService.cancel(context) }) {
